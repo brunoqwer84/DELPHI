@@ -1,0 +1,64 @@
+unit Unit6;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Vcl.StdCtrls, Data.DB, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TForm6 = class(TForm)
+    pnl_baixo: TPanel;
+    pnl_cadsetor: TPanel;
+    Label1: TLabel;
+    Image1: TImage;
+    bt_fechar: TSpeedButton;
+    bt_minimize: TSpeedButton;
+    DBNavigator1: TDBNavigator;
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    procedure bt_fecharClick(Sender: TObject);
+    procedure bt_minimizeClick(Sender: TObject);
+    procedure pnl_cadsetorClick(Sender: TObject);
+    procedure pnl_baixoClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form6: TForm6;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1, Unit2;
+
+procedure TForm6.bt_fecharClick(Sender: TObject);
+begin
+Form6.Close;
+end;
+
+procedure TForm6.bt_minimizeClick(Sender: TObject);
+begin
+Form6.WindowState := WsMinimized;
+end;
+
+procedure TForm6.pnl_baixoClick(Sender: TObject);
+begin
+form2.pnl_mov.Visible := False;
+form2.pnl_rel.Visible := False;
+form2.pnl_cad.Visible := False;
+end;
+
+procedure TForm6.pnl_cadsetorClick(Sender: TObject);
+begin
+form2.pnl_mov.Visible := False;
+form2.pnl_rel.Visible := False;
+form2.pnl_cad.Visible := False;
+end;
+
+end.

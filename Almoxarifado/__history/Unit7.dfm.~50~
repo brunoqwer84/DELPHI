@@ -1,0 +1,362 @@
+object Form7: TForm7
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'Form7'
+  ClientHeight = 547
+  ClientWidth = 904
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnl_cadsetor: TPanel
+    Left = 0
+    Top = 0
+    Width = 904
+    Height = 41
+    Align = alTop
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    OnClick = pnl_cadsetorClick
+    object Label1: TLabel
+      Left = 320
+      Top = 8
+      Width = 187
+      Height = 20
+      Caption = 'ENTRADA DE PRODUTOS'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = 20
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Image1: TImage
+      Left = 9
+      Top = 5
+      Width = 33
+      Height = 36
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+        00200806000000737A7AF400000006624B474400FF00FF00FFA0BDA793000003
+        6F4944415478DAED576F48535114BFE7BDB99995A96D19591F82D20F252154DA
+        3FDCCC28228A8C2232A170B3CCCCF443F4A54882A00FA56586B955464A503982
+        202BCAA709A698884150E1972825DD3433A2A6EE9ECEDC9FF6D69EA2647FC003
+        977BDF7DBF7BEEEFFECE79F76CC0FEB2C17F4B20CA28CD170558E51A3B393EEF
+        B3183EFC5102BAACBA9D0CD96D8F975DB672FD9D29025304A6084C3A81689394
+        CA19D4D050A500713284AD364BF28349534067ACCF618097149CE5F498F59727
+        A480EB661310124401BFD1065F1C83F0A6BFC2D01F9484A9AE94BA43F259BC6A
+        331B8CC1F011FBA4088D1AE3489D994E0ED338609BF7E6F41190C5D46D9C5AB5
+        5A3D9CDD599ADA2BF3784A52693BA18616A7BAF766CF6C9F751BD89D2583FEB0
+        79599276088532026CA747C1EFD8BE9C198D80D7DA85EF8E35DD37377EF59F9C
+        95DD10A91E763691075508C3C4AE72835DA6D22169061B82461AC607D1FD5702
+        3F8B0B8401721D021889509C7B0114DBCA93F303FD684D0DB1AEDE6E5EF7F6D7
+        3049C5B430CF2D103403F07BC8E11D086CD8BF782926A1E784AD345C486D4864
+        3CE1A339E5954BFEF0F79AF081ABABFBFCF1E1998D51030B1C03EC9461383A53
+        5ACA056863EEAFA5C5D6AF5B1B189E9F628C625A93B40518DCF7006B41E06738
+        178A04E0A6EEF294667F6C74566D22A2708DD4CA47C4E3346570E511225F69B7
+        A4B42AED31E6674819FF98BA0DFE739498DAC0C48CC979327B7050E5CE03F479
+        AEB099F5FB47F33F2A81E88C47D331547D8E33C1040CBD59DC4F4E2315C8BAC2
+        12E9F14CA707330FD51CEB2B491A18378139076A97A153784888B9B217C85ED8
+        2CFA15410918EB5A08BF3C00FF1144BEA9E74A4AFBB815D0654A8B28A6B98472
+        5D30619E05B7E8B6DBA3A0C02DEA767B1E1D1489DB2AC6CF8E24EF4442E035CF
+        859249C7390CC8AEF758F4278313A83F4D982C6AD7D11972D17E6D6DD758BE7D
+        042E56562751A129708D0586E78FECDDD114085E94FB40F36948A3ED2D5BDF19
+        CCD9EC834F6322431CF68E92CD8EC0774AFE7D048AABACB2F27A343D6D42E555
+        C994FCFF3B048AAAAC6914DFEA914960E729819A26B49382D14649886C240408
+        6C477E7A9A5546E0DC0D6BAC28B2D76CF2FF2D214731B620635B878CC0884C95
+        D642EA4E4C2209AA71509897BEBDD04F19B95DA8BABB986EBE787A21FED69DE9
+        E71A72F1A5F7E48A04FEB4FD75023F00AFEA88302137A30F0000000049454E44
+        AE426082}
+      Proportional = True
+    end
+    object bt_fechar: TSpeedButton
+      Left = 883
+      Top = 5
+      Width = 20
+      Height = 20
+      Flat = True
+      Glyph.Data = {
+        C6030000424DC60300000000000042000000280000000F0000000F0000000100
+        20000300000084030000000000000000000000000000000000000000FF0000FF
+        0000FF0000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000000000000AB00000061000000000000000000000000000000000000
+        000000000061000000AA00000000000000000000000000000000000000000000
+        000000000062000000FC00000063000000000000000000000000000000630000
+        00FC000000610000000000000000000000000000000000000000000000000000
+        000000000062000000FC000000690000000000000062000000FC000000690000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000000000063000000FC000000A2000000FC0000006300000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000A1000000FF000000A1000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000630000
+        00FC000000A2000000FC00000063000000000000000000000000000000000000
+        00000000000000000000000000000000000000000062000000FC000000690000
+        000000000062000000FC00000069000000000000000000000000000000000000
+        0000000000000000000000000061000000FC0000006300000000000000000000
+        000000000063000000FC00000061000000000000000000000000000000000000
+        000000000000000000A700000060000000000000000000000000000000000000
+        000000000061000000A600000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        00000000000000000000}
+      OnClick = bt_fecharClick
+    end
+  end
+  object pnl_baixo: TPanel
+    Left = 0
+    Top = 41
+    Width = 904
+    Height = 506
+    Align = alClient
+    TabOrder = 1
+    OnClick = pnl_baixoClick
+    object Label3: TLabel
+      Left = 547
+      Top = 12
+      Width = 80
+      Height = 13
+      Caption = 'DATA INICIAL:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 719
+      Top = 12
+      Width = 69
+      Height = 13
+      Caption = 'DATA FINAL:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object sel_data2: TDateTimePicker
+      Left = 794
+      Top = 6
+      Width = 76
+      Height = 28
+      Date = 44734.000000000000000000
+      Time = 0.422382777775055700
+      TabOrder = 0
+    end
+    object grid_mov2: TDBGrid
+      Left = 9
+      Top = 40
+      Width = 392
+      Height = 449
+      BorderStyle = bsNone
+      Color = clBtnFace
+      DataSource = DM.ds_tmov
+      Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ReadOnly = True
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnCellClick = grid_mov2CellClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'IDMOV'
+          Width = 51
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TIPOMOV'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATA'
+          Width = 83
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'USER'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Width = 59
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'STATUS'
+          Visible = True
+        end>
+    end
+    object inclui_lan: TButton
+      Left = 9
+      Top = 9
+      Width = 75
+      Height = 25
+      Caption = 'NOVO'
+      TabOrder = 2
+      OnClick = inclui_lanClick
+    end
+    object bt_cancel_mov: TButton
+      Left = 102
+      Top = 9
+      Width = 75
+      Height = 25
+      Caption = 'CANCELAR'
+      TabOrder = 3
+      OnClick = bt_cancel_movClick
+    end
+    object Panel1: TPanel
+      Left = 407
+      Top = 40
+      Width = 484
+      Height = 449
+      Caption = 'Panel1'
+      TabOrder = 4
+      object Label2: TLabel
+        Left = 9
+        Top = 13
+        Width = 125
+        Height = 13
+        Caption = 'ITENS DO MOVIMENTO:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 264
+        Top = 13
+        Width = 47
+        Height = 13
+        Caption = 'STATUS:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object status: TLabel
+        Left = 317
+        Top = 13
+        Width = 3
+        Height = 13
+      end
+      object MOV: TEdit
+        Left = 140
+        Top = 10
+        Width = 70
+        Height = 21
+        Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object grid_mov_sel: TDBGrid
+        Left = 9
+        Top = 37
+        Width = 456
+        Height = 373
+        BorderStyle = bsNone
+        DataSource = DM.ds_mov_completo
+        Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        ReadOnly = True
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+      end
+      object bt_editaritem: TButton
+        Left = 9
+        Top = 416
+        Width = 88
+        Height = 25
+        Caption = 'EDITAR ITEM'
+        TabOrder = 2
+        OnClick = bt_editaritemClick
+      end
+      object bt_exclui: TButton
+        Left = 368
+        Top = 416
+        Width = 89
+        Height = 25
+        Caption = 'EXCLUIR ITEM'
+        TabOrder = 3
+        OnClick = bt_excluiClick
+      end
+      object bt_inclui: TButton
+        Left = 192
+        Top = 416
+        Width = 81
+        Height = 25
+        Caption = 'INCLUIR ITEM'
+        TabOrder = 4
+        OnClick = bt_incluiClick
+      end
+      object att_titmmov2: TButton
+        Left = 392
+        Top = 6
+        Width = 75
+        Height = 25
+        Caption = 'att_titmmov2'
+        TabOrder = 5
+        Visible = False
+        OnClick = att_titmmov2Click
+      end
+    end
+    object FILTRAR: TButton
+      Left = 424
+      Top = 6
+      Width = 65
+      Height = 28
+      Caption = 'FILTRAR'
+      TabOrder = 5
+      OnClick = FILTRARClick
+    end
+    object sel_data3: TDateTimePicker
+      Left = 633
+      Top = 6
+      Width = 80
+      Height = 28
+      Date = 44734.000000000000000000
+      Time = 0.422382777775055700
+      TabOrder = 6
+    end
+  end
+end

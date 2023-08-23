@@ -1,0 +1,84 @@
+unit Unit8;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls, Vcl.WinXCtrls, IniFiles;
+
+type
+  Tprincipal = class(TForm)
+    btlogin: TButton;
+    btcancelar: TButton;
+    user: TEdit;
+    passwd: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    valido: TDBEdit;
+    Image1: TImage;
+    Label3: TLabel;
+    Image2: TImage;
+    procedure btcancelarClick(Sender: TObject);
+    procedure btloginClick(Sender: TObject);
+    procedure passwdKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  principal: Tprincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1, Unit2, Unit3;
+
+procedure Tprincipal.btcancelarClick(Sender: TObject);
+begin
+Application.Terminate;
+end;
+
+procedure Tprincipal.btloginClick(Sender: TObject);
+begin
+with dm.qrylogin do
+dm.qrylogin.Close;
+dm.qrylogin.SQL.Clear;
+dm.qrylogin.SQL.Add ('SELECT COUNT(1) FROM usuarios WHERE user = (:user) and (SELECT CAST(AES_DECRYPT(senha,"caneta11@") as char) from usuarios WHERE user = (:user)) = (:passwd) and USUARIOS.STATUS <> "INATIVO" ');
+dm.qrylogin.ParamByName('user').AsString := (user.Text);
+dm.qrylogin.ParamByName('passwd').AsString := (passwd.Text);
+dm.qrylogin.Open;
+if valido.text = '1' then
+begin
+//load.hide;
+//load.close;
+principal.Hide;
+load.ShowModal;
+//form2.ShowModal;
+principal.Close;
+end
+else
+begin
+ShowMessage('Usuário ou senha incorretos');
+passwd.Text:= '';
+end;
+
+end;
+
+procedure Tprincipal.FormShow(Sender: TObject);
+begin
+user.SetFocus;
+end;
+
+procedure Tprincipal.passwdKeyPress(Sender: TObject; var Key: Char);
+begin
+if key = #13 then
+begin
+btlogin.Click;
+end;
+end;
+end.

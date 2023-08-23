@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/05/25 07:45:02.000.405,=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit8.pas</Transaction>
+    <Transaction>2022/05/25 08:03:34.000.996,C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit8.pas=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit8.pas</Transaction>
+    <Transaction>2022/05/25 08:03:34.000.996,C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit8.dfm=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit8.dfm</Transaction>
+    <Transaction>2022/05/25 08:03:46.000.432,C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Almoxarifado.dproj</Transaction>
+    <Transaction>2022/05/25 14:59:29.000.845,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit1.pas</Transaction>
+    <Transaction>2022/05/26 15:45:16.000.057,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit2.pas</Transaction>
+    <Transaction>2022/06/09 14:21:39.000.271,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit3.pas</Transaction>
+    <Transaction>2022/06/10 09:25:46.000.980,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit4.pas</Transaction>
+    <Transaction>2022/06/14 13:29:53.000.977,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit5.pas</Transaction>
+    <Transaction>2022/06/14 14:03:24.000.645,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit6.pas</Transaction>
+    <Transaction>2022/06/22 09:15:50.000.123,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit7.pas</Transaction>
+    <Transaction>2022/06/22 09:16:45.000.735,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit9.pas</Transaction>
+    <Transaction>2022/06/24 15:25:03.000.486,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit10.pas</Transaction>
+    <Transaction>2022/07/18 16:44:47.000.903,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit11.pas</Transaction>
+    <Transaction>2022/07/20 09:31:59.000.316,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit12.pas</Transaction>
+    <Transaction>2022/07/29 13:23:04.000.465,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit13.pas</Transaction>
+    <Transaction>2022/08/04 08:57:40.000.054,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit14.pas</Transaction>
+    <Transaction>2022/08/04 14:49:00.000.193,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit15.pas</Transaction>
+    <Transaction>2022/09/20 16:22:40.000.819,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit16.pas</Transaction>
+    <Transaction>2023/01/13 14:58:38.000.367,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit17.pas</Transaction>
+    <Transaction>2023/01/13 15:01:54.000.609,C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit17.pas=</Transaction>
+    <Transaction>2023/01/13 15:55:49.000.654,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit18.pas</Transaction>
+    <Transaction>2023/06/13 10:08:34.000.593,=C:\Users\Administrador\Documents\Embarcadero\Studio\Almoxarifado\Unit19.pas</Transaction>
+  </Transactions>
+</BorlandProject>

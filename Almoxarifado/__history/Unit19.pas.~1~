@@ -1,0 +1,34 @@
+unit Unit19;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ComCtrls;
+
+type
+  Tfiltra_entrada = class(TForm)
+    bt_ok: TButton;
+    bt_cancelar: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    data_inicio: TDateTimePicker;
+    data_fim: TDateTimePicker;
+    Label3: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  filtra_entrada: Tfiltra_entrada;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1;
+
+end.

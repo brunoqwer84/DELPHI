@@ -1,0 +1,106 @@
+unit Unit16;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls;
+
+type
+  Tfiltros_consumo = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    sel_data2: TDateTimePicker;
+    sel_data3: TDateTimePicker;
+    Button1: TButton;
+    Button2: TButton;
+    Label5: TLabel;
+    box_setor: TDBLookupComboBox;
+    box_pessoa: TDBLookupComboBox;
+    procedure FormShow(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure box_pessoaClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  filtros_consumo: Tfiltros_consumo;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1;
+
+
+
+procedure Tfiltros_consumo.box_pessoaClick(Sender: TObject);
+  begin
+  DM.qry_clifor.Close;
+  DM.qry_clifor.SQL.Clear;
+  DM.qry_clifor.SQL.Add('SELECT *  FROM FCFO WHERE CLIFOR LIKE "C"  AND ATIVO = "ATIVO" ORDER BY NOME');
+  DM.qry_clifor.Open;
+  end;
+
+procedure Tfiltros_consumo.Button1Click(Sender: TObject);
+  var
+  dat: string;
+  dat2: string;
+  begin
+    DM.qry_rel.Close;
+    DM.qry_rel.SQL.Clear;
+    DM.qry_rel.SQL.Add('SELECT TITMMOV.NOMEPRD, SUM(TITMMOV.QUANTIDADE) AS QUANTIDADE, SETORES.SETOR, FCFO.NOME '+
+    'FROM TMOV '+
+    'INNER JOIN TITMMOV ON TMOV.IDMOV = TITMMOV.IDMOV'+
+    'INNER JOIN FCFO ON TMOV.IDCFO = FCFO.IDCFO'+
+    'INNER JOIN SETORES ON FCFO.IDSETOR = SETORES.IDSETOR '+
+    'WHERE TMOV.TIPOMOV = "S" AND TMOV.STATUS <> "CANCELADO" AND FCFO.NOME LIKE (:PESSOA) AND SETORES.SETOR LIKE (:SETOR) AND TMOV.DATA BETWEEN (:DT) AND (:DT2) GROUP BY NOME, NOMEPRD ORDER BY SETOR, NOME');
+    dat := (FormatDateTime('yyyy-mm-dd hh-mm-ss',sel_data2.Date));
+    dat2 := (FormatDateTime('yyyy-mm-dd 23-59-59',sel_data3.Date));
+    dm.qry_rel.ParamByName('DT').AsString := dat;
+    dm.qry_rel.ParamByName('DT2').AsString := dat2;
+    DM.qry_rel.ParamByName('SETOR').AsString := box_setor.Text;
+    DM.qry_rel.ParamByName('PESSOA').AsString := box_pessoa.Text;
+
+    if box_setor.Text = '' then
+      begin
+      DM.qry_rel.ParamByName('SETOR').AsString := '%';
+      end;
+
+    if box_pessoa.Text = '' then
+      begin
+      DM.qry_rel.ParamByName('PESSOA').AsString := '%';
+      end;
+
+    filtros_consumo.Close;
+
+    DM.qry_rel.Open;
+    dm.rel_consumo.Variables['data']:= sel_data2.Date;
+    dm.rel_consumo.Variables['final']:= sel_data3.Date;
+    dm.rel_consumo.Variables['pessoa']:= QuotedStr(box_pessoa.Text);
+    dm.rel_consumo.Variables['setor']:= QuotedStr(box_setor.Text);
+    DM.rel_consumo.ShowReport;
+  end;
+
+procedure Tfiltros_consumo.Button2Click(Sender: TObject);
+begin
+filtros_consumo.Close;
+end;
+
+procedure Tfiltros_consumo.FormShow(Sender: TObject);
+  begin
+  DM.tb_setores.Active := TRUE;
+  DM.qry_clifor.Open ;
+  box_setor.KeyValue := null;
+  box_pessoa.KeyValue := null;
+  sel_data2.Date := date;
+  sel_data3.Date := date;
+  end;
+
+end.

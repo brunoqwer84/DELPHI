@@ -1,0 +1,66 @@
+unit Unit19;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ComCtrls;
+
+type
+  Tfiltra_entrada = class(TForm)
+    bt_ok: TButton;
+    bt_cancelar: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    data_inicio: TDateTimePicker;
+    data_fim: TDateTimePicker;
+    Label3: TLabel;
+    box_fornecedor: TDBLookupComboBox;
+    procedure bt_okClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  filtra_entrada: Tfiltra_entrada;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1;
+
+procedure Tfiltra_entrada.bt_okClick(Sender: TObject);
+  var
+  dat: string;
+  dat2: string;
+  begin
+    DM.qry_entradas.Close;
+    DM.qry_entradas.SQL.Clear;
+    DM.qry_entradas.SQL.Add('SELECT DATE_FORMAT(TMOV.DATA,"%d/%m/%y") as "DATA", TMOV.IDMOV, FCFO.NOME,TITMMOV.NOMEPRD, TITMMOV.QUANTIDADE, TITMMOV.VLENTRADA'+
+    'FROM TMOV '+
+    'INNER JOIN TITMMOV ON TMOV.IDMOV = TITMMOV.IDMOV INNER JOIN TPRD ON TITMMOV.IDPRD = TPRD.IDPRD INNER JOIN FCFO ON TMOV.IDCFO = FCFO.IDCFO '+
+    'WHERE TMOV.TIPOMOV = "E" AND TMOV.STATUS <> "CANCELADO" AND FCFO.NOME LIKE (:FORNECEDOR) AND TMOV.DATA BETWEEN (:DT) AND (:DT2) GROUP BY TMOV.IDMOV ORDER BY TMOV.IDMOV');
+    dat := (FormatDateTime('yyyy-mm-dd hh-mm-ss',data_inicio.Date));
+    dat2 := (FormatDateTime('yyyy-mm-dd 23-59-59',data_fim.Date));
+    dm.qry_entradas.ParamByName('DT').AsString := dat;
+    dm.qry_entradas.ParamByName('DT2').AsString := dat2;
+    DM.qry_entradas.ParamByName('FORNECEDOR').AsString := box_fornecedor.Text;
+
+    if box_fornecedor.Text = '' then
+      begin
+      DM.qry_entradas.ParamByName('FORNECEDOR').AsString := '%';
+      end;
+
+    filtra_entrada.Close;
+
+    DM.qry_entradas.Open;
+    dm.rel_entradas.Variables['data_inicio']:= data_inicio.Date;
+    dm.rel_entradas.Variables['data_fim']:= data_fim.Date;
+    dm.rel_entradas.Variables['fornecedor']:= QuotedStr(box_fornecedor.Text);
+    DM.rel_entradas.ShowReport;
+end;
+
+end.

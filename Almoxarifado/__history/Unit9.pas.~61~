@@ -1,0 +1,250 @@
+unit Unit9;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.DBCtrls, Vcl.Mask;
+
+type
+  TForm9 = class(TForm)
+    pnl_cadsetor: TPanel;
+    Label1: TLabel;
+    Image1: TImage;
+    bt_fechar: TSpeedButton;
+    pnl_baixo: TPanel;
+    sel_data: TDateTimePicker;
+    grid_mov: TDBGrid;
+    inclui_lan: TButton;
+    bt_cancel_mov: TButton;
+    FILTRAR: TButton;
+    grid_mov_sel: TDBGrid;
+    MOV: TEdit;
+    Panel1: TPanel;
+    Label2: TLabel;
+    sel_data2: TDateTimePicker;
+    Label3: TLabel;
+    Label4: TLabel;
+    bt_editaritem: TButton;
+    bt_inclui: TButton;
+    bt_exclui: TButton;
+    procedure bt_minimizeClick(Sender: TObject);
+    procedure bt_fecharClick(Sender: TObject);
+    procedure inclui_lanClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FILTRARClick(Sender: TObject);
+    procedure bt_cancel_movClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure grid_movCellClick(Column: TColumn);
+    procedure bt_editaritemClick(Sender: TObject);
+    procedure pnl_cadsetorClick(Sender: TObject);
+    procedure pnl_baixoClick(Sender: TObject);
+    procedure bt_incluiClick(Sender: TObject);
+    procedure bt_excluiClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form9: TForm9;
+
+implementation
+
+{$R *.dfm}
+
+uses Unit1, Unit10, Unit8, Unit13, Unit2, Unit14, Unit15;
+
+//cancelar movimento por idmov
+procedure TForm9.bt_cancel_movClick(Sender: TObject);
+begin
+//se movimento ja tiver cancelado nao deixa executar novamente
+if grid_mov.Columns[5].Field.text = 'CANCELADO' then
+begin
+ShowMessage('Não é possível cancelar um movimento com STATUS: CANCELADO.');
+Abort;
+end
+else
+begin
+if MessageBox(HANDLE, 'Deseja CANCELAR o movimento ?', 'Aviso', MB_YESNO + MB_ICONQUESTION) = idyes then
+begin
+DM.qry_uptmov.Close;
+DM.qry_uptmov.SQL.Clear;
+DM.qry_uptmov.SQL.Add('UPDATE TMOV SET STATUS = ("CANCELADO") WHERE IDMOV = (:IDCAN)');
+dm.qry_uptmov.ParamByName('IDCAN').AsString := grid_mov.SelectedField.Text;
+DM.qry_uptmov.ExecSQL;
+DM.qry_uptmov.Close;
+DM.qry_uptmov.SQL.Clear;
+DM.qry_uptmov.SQL.Add('UPDATE TPRD INNER JOIN TITMMOV ON TPRD.IDPRD = TITMMOV.IDPRD SET ESTOQUE = (ESTOQUE + TITMMOV.QUANTIDADE)WHERE TITMMOV.IDMOV = (:IDCAN)');
+DM.qry_uptmov.ParamByName('IDCAN').AsString := grid_mov.SelectedField.Text;  //codigo da linha acima retorna os produtos para o estoque quando cancela o movimento
+DM.qry_uptmov.ExecSQL;
+filtrar.Click;
+ShowMessage('Movimento cancelado com sucesso!');
+end;
+end;
+end;
+
+procedure TForm9.bt_editaritemClick(Sender: TObject);
+begin
+if grid_mov.Columns[5].Field.text = 'CANCELADO' then
+begin
+ShowMessage('Não é possível editar um item de movimento CANCELADO.');
+Abort;
+end
+else
+begin
+grid_mov_sel.ReadOnly := false;
+edita_mov.Show;
+form2.Enabled := false;
+
+edita_mov.MOV.Text := grid_mov.Columns[0].Field.text;
+edita_mov.tipo.Text := grid_mov.Columns[1].Field.text;
+edita_mov.nomecfo.Text := grid_mov.Columns[4].Field.text;
+edita_mov.nome_prd.Text := grid_mov_sel.Columns[0].Field.text;
+edita_mov.qtd_atual.Text := grid_mov_sel.Columns[1].Field.text;
+end;
+end;
+
+procedure TForm9.bt_excluiClick(Sender: TObject);
+begin
+if grid_mov.Columns[5].Field.text = 'CANCELADO' then
+begin
+ShowMessage('Não é possível editar um item de movimento CANCELADO.');
+Abort;
+end;
+if MessageBox(HANDLE, 'Deseja EXCLUIR o item de movimento ?', 'Aviso', MB_YESNO + MB_ICONQUESTION) = idyes then
+begin
+DM.qry_uptmov.Close;
+DM.qry_uptmov.SQL.Clear;
+DM.qry_uptmov.SQL.Add('UPDATE TPRD SET ESTOQUE = (ESTOQUE + (:QTD)) WHERE NOMEPRD = (:NOMEPRD)');
+DM.qry_uptmov.ParamByName('QTD').AsString := grid_mov_sel.Columns[1].Field.Text;  //codigo da linha acima dá baixa nas quantiadades de itens contidas na tabela de itens de movimento
+DM.qry_uptmov.ParamByName('NOMEPRD').AsString := grid_mov_sel.Columns[0].Field.Text;
+DM.qry_uptmov.ExecSQL;
+DM.qry_uptmov.Close;
+DM.qry_uptmov.SQL.Clear;
+DM.qry_uptmov.SQL.Add('DELETE FROM TITMMOV WHERE PK = (:PK) ');
+DM.qry_uptmov.ParamByName('PK').AsString := grid_mov_sel.Columns[2].Field.Text;
+DM.qry_uptmov.ExecSQL;
+
+ShowMessage('Item Excluído com Sucesso!');
+//Atualizar itens de movimento
+DM.qry_mov_completo.Close;
+DM.qry_mov_completo.SQL.Clear;
+DM.qry_mov_completo.SQL.Add('SELECT TITMMOV.NOMEPRD, TITMMOV.QUANTIDADE, TITMMOV.PK '+
+'FROM TMOV INNER JOIN FCFO ON TMOV.IDCFO = FCFO.IDCFO INNER JOIN usuarios ON TMOV.IDUSER = usuarios.IDUSER INNER JOIN titmmov ON TMOV.IDMOV = TITMMOV.IDMOV WHERE TMOV.IDMOV = (:MOV)');
+DM.qry_mov_completo.ParamByName('MOV').AsString := (form9.grid_mov.Columns[0].Field.text);
+DM.qry_mov_completo.Open;
+MOV.Text := form9.grid_mov.Columns[0].Field.text;
+end;
+end;
+
+procedure TForm9.bt_fecharClick(Sender: TObject);
+begin
+Form9.Close;
+end;
+
+procedure TForm9.bt_incluiClick(Sender: TObject);
+begin
+if grid_mov.Columns[5].Field.text = 'CANCELADO' then
+begin
+ShowMessage('Não é possível editar um item de movimento CANCELADO.');
+Abort;
+end
+else
+begin
+insere_item_saida.Show;
+insere_item_saida.combo_prd2.KeyValue := null;
+insere_item_saida.qtd_prd.Text := '';
+form2.Enabled := false;
+
+insere_item_saida.MOV.Text := form9.grid_mov.Columns[0].Field.text;
+insere_item_saida.tipo.Text := form9.grid_mov.Columns[1].Field.text;
+insere_item_saida.nomecfo.Text := form9.grid_mov.Columns[4].Field.text;
+
+end;
+end;
+
+procedure TForm9.bt_minimizeClick(Sender: TObject);
+begin
+Form9.WindowState := wsMinimized;
+end;
+
+procedure TForm9.Button1Click(Sender: TObject);
+begin
+
+end;
+
+//botão de filtrar o grid por data do movimento
+procedure TForm9.FILTRARClick(Sender: TObject);
+var
+dat:string;
+dat2:string;
+begin
+with dm.qry_tmov do
+dm.qry_tmov.Close;
+dm.qry_tmov.SQL.Clear;
+dm.qry_tmov.SQL.Add('SELECT TMOV.IDMOV, TMOV.TIPOMOV, TMOV.DATA, USUARIOS.USER, FCFO.NOME, TMOV.STATUS FROM TMOV INNER JOIN USUARIOS ON TMOV.IDUSER = USUARIOS.IDUSER INNER JOIN FCFO ON TMOV.IDCFO = FCFO.IDCFO WHERE DATA BETWEEN (:DT2) AND (:DT) AND TIPOMOV LIKE "S"');
+dat := (FormatDateTime('yyyy-mm-dd 23-59-59',sel_data.Date));
+dat2 := (FormatDateTime('yyyy-mm-dd hh-mm-ss',sel_data2.Date));
+dm.qry_tmov.ParamByName('DT').AsString := dat;
+dm.qry_tmov.ParamByName('DT2').AsString := dat2;
+dm.qry_tmov.Open;
+grid_mov.Columns[3].Width := 70;
+end;
+
+//recebe a data a data atual no filtro de data do grid quando o form9 é mostrado
+procedure TForm9.FormShow(Sender: TObject);
+begin
+sel_data.Date := date;
+sel_data2.Date := date;
+filtrar.Click;
+end;
+
+//listar itens de movimento no grid do lado do grid de movimento
+procedure TForm9.grid_movCellClick(Column: TColumn);
+begin
+with DM.qry_mov_completo do
+DM.qry_mov_completo.Close;
+DM.qry_mov_completo.SQL.Clear;
+DM.qry_mov_completo.SQL.Add('SELECT TITMMOV.NOMEPRD, TITMMOV.QUANTIDADE, TITMMOV.PK '+
+'FROM TMOV INNER JOIN FCFO ON TMOV.IDCFO = FCFO.IDCFO INNER JOIN usuarios ON TMOV.IDUSER = usuarios.IDUSER INNER JOIN titmmov ON TMOV.IDMOV = TITMMOV.IDMOV WHERE TMOV.IDMOV = (:MOV)');
+DM.qry_mov_completo.ParamByName('MOV').AsString := (grid_mov.Columns[0].Field.text);
+DM.qry_mov_completo.Open;
+MOV.Text := grid_mov.Columns[0].Field.text;
+end;
+
+procedure TForm9.inclui_lanClick(Sender: TObject);
+begin
+tela_lanca_saida.Refresh;
+tela_lanca_saida.Show;
+with DM.qry_uptmov do
+DM.qry_uptmov.Close;
+DM.qry_uptmov.SQL.Clear;
+DM.qry_uptmov.SQL.Add('INSERT INTO TMOV(TIPOMOV, DATA, IDUSER, IDCFO,STATUS)'); //insere o tmov sequencial
+DM.qry_uptmov.SQL.Add('VALUES ( "S",:tdata , NULL,NULL,"OK")');
+dm.qry_uptmov.ParamByName('tdata').AsDateTime := Now;
+DM.qry_uptmov.ExecSQL;
+DM.qry_idmov.Close;
+DM.qry_idmov.Open;
+DM.tb_titmmov.Filtered := false;
+DM.tb_titmmov.Filter   := 'Upper(IDMOV) like' + QuotedStr(AnsiUpperCase('%'+tela_lanca_saida.idmov.Text+'%')); //filtra a tabela de itens com base no campo do seu idmov
+DM.tb_titmmov.Filtered := true;
+end;
+procedure TForm9.pnl_baixoClick(Sender: TObject);
+begin
+form2.pnl_mov.Visible := False;
+form2.pnl_rel.Visible := False;
+form2.pnl_cad.Visible := False;
+end;
+
+procedure TForm9.pnl_cadsetorClick(Sender: TObject);
+begin
+form2.pnl_mov.Visible := False;
+form2.pnl_rel.Visible := False;
+form2.pnl_cad.Visible := False;
+end;
+
+end.

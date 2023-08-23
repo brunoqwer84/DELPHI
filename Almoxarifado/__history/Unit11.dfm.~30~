@@ -1,0 +1,209 @@
+object entradas: Tentradas
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = bsSingle
+  Caption = 'ENTRADA DE PRODUTOS'
+  ClientHeight = 445
+  ClientWidth = 679
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 41
+    Height = 13
+    Caption = 'IDMOV:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 52
+    Width = 75
+    Height = 13
+    Caption = 'FORNECEDOR:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 89
+    Width = 57
+    Height = 13
+    Caption = 'PRODUTO:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 295
+    Top = 89
+    Width = 76
+    Height = 13
+    Caption = 'QUANTIDADE:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label5: TLabel
+    Left = 440
+    Top = 89
+    Width = 70
+    Height = 13
+    Caption = 'VALOR UNIT:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object idmov2: TDBEdit
+    Left = 55
+    Top = 5
+    Width = 50
+    Height = 21
+    DataField = 'IDMOV'
+    DataSource = DM.ds_idmov
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object box_fcfo2: TDBLookupComboBox
+    Left = 89
+    Top = 47
+    Width = 145
+    Height = 21
+    DropDownRows = 15
+    KeyField = 'NOME'
+    ListField = 'NOME'
+    ListSource = DM.ds_for
+    TabOrder = 1
+    OnEnter = box_fcfo2Enter
+  end
+  object grid_titmmov2: TDBGrid
+    Left = 8
+    Top = 115
+    Width = 657
+    Height = 292
+    DataSource = DM.ds_itementrada
+    Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ReadOnly = True
+    TabOrder = 5
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object combo_prd2: TDBLookupComboBox
+    Left = 71
+    Top = 86
+    Width = 218
+    Height = 21
+    DropDownRows = 25
+    KeyField = 'NOMEPRD'
+    ListField = 'NOMEPRD'
+    ListSource = DM.dsprd
+    TabOrder = 2
+  end
+  object qtd_prd2: TEdit
+    Left = 377
+    Top = 86
+    Width = 41
+    Height = 21
+    TabOrder = 3
+    OnKeyPress = qtd_prd2KeyPress
+  end
+  object bt_insert: TButton
+    Left = 590
+    Top = 84
+    Width = 75
+    Height = 25
+    Caption = 'INSERE'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 4
+    OnClick = bt_insertClick
+  end
+  object bt_salvar: TButton
+    Left = 496
+    Top = 413
+    Width = 75
+    Height = 25
+    Caption = 'SALVAR'
+    TabOrder = 6
+    OnClick = bt_salvarClick
+  end
+  object bt_cancelar: TButton
+    Left = 590
+    Top = 413
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'CANCELAR'
+    TabOrder = 7
+    OnClick = bt_cancelarClick
+  end
+  object exc_item: TButton
+    Left = 8
+    Top = 413
+    Width = 79
+    Height = 25
+    Caption = 'EXCLUIR ITEM'
+    TabOrder = 8
+    OnClick = exc_itemClick
+  end
+  object navi2: TDBNavigator
+    Left = 274
+    Top = 8
+    Width = 220
+    Height = 25
+    DataSource = DM.ds_titmmov
+    VisibleButtons = [nbInsert, nbDelete, nbPost, nbCancel]
+    TabOrder = 9
+    Visible = False
+  end
+  object vl_uni: TEdit
+    Left = 516
+    Top = 84
+    Width = 55
+    Height = 21
+    TabOrder = 10
+    OnKeyPress = vl_uniKeyPress
+  end
+end
