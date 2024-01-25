@@ -1,7 +1,7 @@
 ﻿object DM: TDM
   OldCreateOrder = False
-  Height = 831
-  Width = 1010
+  Height = 814
+  Width = 989
   object dslogin: TDataSource
     DataSet = qrylogin
     Left = 136
@@ -46,6 +46,7 @@
     Active = True
     IndexFieldNames = 'NOME'
     Connection = conexao
+    UpdateOptions.UpdateTableName = 'almoxarifado.fcfo'
     TableName = 'almoxarifado.fcfo'
     Left = 24
     Top = 152
@@ -133,6 +134,7 @@
     Active = True
     IndexFieldNames = 'SETOR'
     Connection = conexao
+    UpdateOptions.UpdateTableName = 'almoxarifado.setores'
     TableName = 'almoxarifado.setores'
     Left = 32
     Top = 216
@@ -210,6 +212,7 @@
     Active = True
     IndexFieldNames = 'PK'
     Connection = conexao
+    UpdateOptions.UpdateTableName = 'titmmov'
     TableName = 'titmmov'
     Left = 32
     Top = 448
@@ -1614,13 +1617,13 @@
   end
   object qry_editamov: TFDQuery
     Connection = conexao
-    Left = 704
-    Top = 16
+    Left = 688
+    Top = 64
   end
   object ds_editamov: TDataSource
     DataSet = qry_editamov
     Left = 776
-    Top = 16
+    Top = 64
   end
   object verifica_dup: TFDQuery
     Connection = conexao
@@ -3710,7 +3713,8 @@
     SQL.Strings = (
       
         'SELECT DATE_FORMAT(TMOV.DATA,'#39'%d/%m/%Y'#39') AS '#39'DATA'#39', TMOV.IDMOV, ' +
-        'FCFO.NOME,  TITMMOV.NOMEPRD, TITMMOV.QUANTIDADE, TPRD.VLUNIT'
+        'FCFO.NOME,  TITMMOV.NOMEPRD, TITMMOV.QUANTIDADE, TITMMOV.VLENTRA' +
+        'DA'
       'FROM TMOV'
       'INNER JOIN TITMMOV ON '
       'TMOV.IDMOV = TITMMOV.IDMOV'
@@ -3738,7 +3742,7 @@
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44764.638547500000000000
-    ReportOptions.LastChange = 44859.429766944400000000
+    ReportOptions.LastChange = 45090.569017407400000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -4482,7 +4486,7 @@
         end
         object Memo14: TfrxMemoView
           AllowVectorExport = True
-          Left = 264.567100000000000000
+          Left = 257.008040000000000000
           Top = 117.165430000000000000
           Width = 26.456710000000000000
           Height = 18.897650000000000000
@@ -4497,9 +4501,9 @@
         end
         object Memo15: TfrxMemoView
           AllowVectorExport = True
-          Left = 366.614410000000000000
+          Left = 385.512060000000000000
           Top = 117.165430000000000000
-          Width = 34.015770000000000000
+          Width = 37.795300000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
           Memo.UTF8W = (
@@ -4507,13 +4511,45 @@
         end
         object Memo18: TfrxMemoView
           AllowVectorExport = True
-          Left = 264.567100000000000000
+          Left = 181.417440000000000000
           Top = 90.708720000000000000
           Width = 102.047310000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
           Memo.UTF8W = (
             'FORNECEDOR:')
+        end
+        object Memo23: TfrxMemoView
+          AllowVectorExport = True
+          Left = 283.464750000000000000
+          Top = 90.708720000000000000
+          Width = 268.346630000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[fornecedor]')
+        end
+        object Memo24: TfrxMemoView
+          AllowVectorExport = True
+          Left = 283.464750000000000000
+          Top = 117.165430000000000000
+          Width = 102.047310000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.Kind = fkDateTime
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[data_inicio]')
+        end
+        object Memo25: TfrxMemoView
+          AllowVectorExport = True
+          Left = 423.307360000000000000
+          Top = 117.165430000000000000
+          Width = 102.047310000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.Kind = fkDateTime
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[data_fim]')
         end
       end
       object MasterData1: TfrxMasterData
@@ -4542,7 +4578,7 @@
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[(<frxDBDataset1."VLUNIT">)]')
+            '[(<frxDBDataset1."VLENTRADA">)]')
           ParentFont = False
         end
         object SysMemo1: TfrxSysMemoView
@@ -4633,7 +4669,7 @@
           Font.Style = []
           Frame.Typ = []
           Memo.UTF8W = (
-            '[(<frxDBDataset1."QUANTIDADE">*<frxDBDataset1."VLUNIT">)]')
+            '[(<frxDBDataset1."QUANTIDADE">*<frxDBDataset1."VLENTRADA">)]')
           ParentFont = False
         end
       end
@@ -4821,7 +4857,7 @@
           Font.Style = [fsBold]
           Frame.Typ = []
           Memo.UTF8W = (
-            'VALOR UNIT.')
+            'VALOR ENT.')
           ParentFont = False
         end
         object Memo19: TfrxMemoView
@@ -4868,7 +4904,7 @@
           Font.Style = [fsBold]
           Frame.Typ = []
           Memo.UTF8W = (
-            '[SUM(<frxDBDataset1."QUANTIDADE">*<frxDBDataset1."VLUNIT">)]')
+            '[SUM(<frxDBDataset1."QUANTIDADE">*<frxDBDataset1."VLENTRADA">)]')
           ParentFont = False
         end
         object Memo22: TfrxMemoView
